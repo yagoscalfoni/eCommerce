@@ -1,4 +1,8 @@
+global using eCommerce.Models;
+
+using eCommerce.API.Database;
 using eCommerce.API.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
+builder.Services.AddDbContext<eCommerceContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("eCommerce"))
+    );
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
