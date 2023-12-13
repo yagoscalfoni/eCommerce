@@ -3,6 +3,12 @@ using System.Net.NetworkInformation;
 
 namespace eCommerce.API.Repositories
 {
+    /*
+     *  Controller > UsuarioRepository
+     *  Controller > IUsuarioRepository(Abstrai) > UsuarioRepository (Implementa IUsuarioRepository)
+     *  Controller > IUsuarioRepository > Usuario EFRepository (EF CORE)
+     *  Controller > IUsuarioRepository > UsuarioMockRepository (Teste)
+     */
     public class UsuarioRepository : IUsuarioRepository
     {
         public static List<Usuario> _db = new List<Usuario>();
