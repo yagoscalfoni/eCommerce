@@ -19,7 +19,8 @@ namespace eCommerce.API.Database
         public DbSet<Departamento> Departamentos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Datasource=(localdb)\\MSSQLLocalDB;Initial Catalog=eCommerce; Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Data Source=.\\OTIMA;Initial Catalog=eCommerce;Integrated Security=True;"
+);
         }
     }
 }
