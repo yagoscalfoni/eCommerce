@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Models.DataAnnotations\eCommerce.Models.DataAnnotations.csproj" />
+    <ProjectReference Include="..\eCommerce.Models.FluetAPI\eCommerce.Models.FluetAPI.csproj" />
   </ItemGroup>
 
 </Project>
