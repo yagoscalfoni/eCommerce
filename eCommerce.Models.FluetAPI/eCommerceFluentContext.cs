@@ -22,6 +22,16 @@ namespace eCommerce.Models.FluetAPI
         public DbSet<Contato>? Contatos { get; set; }
         public DbSet<EnderecoEntrega>? EnderecosEntrega { get; set; }
         public DbSet<Departamento>? Departamentos { get; set; }
-    
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            /*
+             * Table, Column, NotMapped, DatabaseGenerated(ValueGeneratedNever= None, ValueGeneratedOnAdd=Identity, ValueGeneratedOndAddOrUpdate=Computed)
+             */
+            modelBuilder.Entity<Usuario>().ToTable("TB_USUARIOS");
+            modelBuilder.Entity<Usuario>().Property(x => x.RG).HasColumnName("REGISTRO_GERAL").HasMaxLength(10).HasDefaultValue("RG-AUSENTE").IsRequired();
+            modelBuilder.Entity<Usuario>().Ignore(x => x.Sexo);
+            modelBuilder.Entity<Usuario>().Property(x => x.Id).ValueGeneratedOnAdd();
+        }
     }
 }
