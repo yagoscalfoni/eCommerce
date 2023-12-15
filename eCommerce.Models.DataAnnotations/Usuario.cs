@@ -1,23 +1,31 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models
 {
     /*
+     * Usuario -> Pedido
+     * Usuario (Clientes e Colaborador)
+     * Fazer Pedido (Usuario-Cliente)
+     * Atualiazar o pedido (Usuario-Colaborador)
+     * Supervisionar o pedido (Usuario-Colaborador-Supervisor)
+     * 
+     * 
      * Schema:
      *  *[Table] = Definir o nome da tabela.
      *  *[Column] = Definir o nome da coluna.
      *  *[NotMapped] = Não mapear uma propriedade.
-     *  [ForeignKey] = Definir que a propriedade é o vínculo da chave estrangeira.
-     *  [InverseProperty] = Definir a referência para cada FK vinda da mesma tabela.
+     *  *[ForeignKey] = Definir que a propriedade é o vínculo da chave estrangeira.
+     *  *[InverseProperty] = Definir a referência para cada FK vinda da mesma tabela.
      *  *[DatabaseGenerated] = Definir se uma propriedade vai ou não ser gerenciada pelo banco.
      *  
      *  DataAnnotations:
      *  [Key] = Definir que a propriedade é uma PK.
      *  
      *  EF Core
-     *  [Index] = Definir/Cria Índice no banco (x - Unique).
+     *  *[Index] = Definir/Cria Índice no banco (x - Unique).
      */
 
 
@@ -27,6 +35,8 @@ namespace eCommerce.Models
      * Database-First = Database -> Code
      */
 
+    [Index(nameof(Email), IsUnique = true, Name = "IX_EMAIL_UNICO")]
+    [Index(nameof(Nome), nameof(CPF))]
     [Table("TB_USUARIOS")]
     public class Usuario
     {
@@ -45,6 +55,9 @@ namespace eCommerce.Models
         */
         public string Nome { get; set; } = null!;
         public string Email { get; set; } = null!;
+
+        [Required]
+        [MaxLength(15)]
         public string? Sexo { get; set; }
 
         [Column("REGISTRO_GERAL")]
@@ -68,7 +81,23 @@ namespace eCommerce.Models
         public Contato? Contato { get; set; }        
         public ICollection<EnderecoEntrega>? EnderecoEntrega { get; set; }
         public ICollection<Departamento>? Departamentos { get; set; }
-        
+
+        /*
+         *  PedidosCompradosPeloCliente
+         *  - ClienteId
+         *  - ColaboradorId
+         *  - SupervisorId
+         */
+
+        [InverseProperty("Cliente")]
+        public ICollection<Pedido>? PedidosCompradosPeloCliente { get; set; }
+
+        [InverseProperty("Colaborador")]
+        public ICollection<Pedido>? PedidosGerenciadosPeloColaborador { get; set; }
+
+        [InverseProperty("Supervisor")]
+        public ICollection<Pedido>? PedidosSupervisionadosPeloColaboradorSupervisor { get; set; }
+
         /*
         / TODO - Vincular com as classes:
         / - Cliente
