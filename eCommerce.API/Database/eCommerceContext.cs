@@ -19,7 +19,27 @@ namespace eCommerce.API.Database
         public DbSet<Departamento> Departamentos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Datasource=(localdb)\\MSSQLLocalDB;Initial Catalog=eCommerce; Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Data Source=YAGO-PC\\SQLEXPRESS;Initial Catalog=eCommerce; Integrated Security=True;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Departamento>().HasData(
+                new Departamento
+                { Id = 1, Nome = "Mercado" },
+                new Departamento
+                { Id = 2, Nome = "Moda" },
+                new Departamento
+                { Id = 3, Nome = "Móveis" },
+                new Departamento
+                { Id = 4, Nome = "Informática" },
+                new Departamento
+                { Id = 5, Nome = "Eletrodomésticos" },
+                new Departamento
+                { Id = 6, Nome = "Eletroportáteis" },
+                new Departamento
+                { Id = 7, Nome = "Beleza" }
+                );
         }
     }
 }

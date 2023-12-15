@@ -1,4 +1,5 @@
-﻿using eCommerce.Models;
+﻿using eCommerce.API.Database;
+using eCommerce.Models;
 using System.Net.NetworkInformation;
 
 namespace eCommerce.API.Repositories
@@ -11,31 +12,38 @@ namespace eCommerce.API.Repositories
      */
     public class UsuarioRepository : IUsuarioRepository
     {
-        public static List<Usuario> _db = new List<Usuario>();
+        private readonly eCommerceContext _db;
+
+        public UsuarioRepository(eCommerceContext context)
+        {
+            _db = context;
+        }
         public void Add(Usuario usuario)
         {
-            _db.Add(usuario);
+            _db.Usuarios.Add(usuario);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
             _db.Remove(GetById(id));
+            _db.SaveChanges();
         }
 
         public List<Usuario> Get()
         {
-            return _db;
+            return _db.Usuarios.OrderBy(x => x.Id).ToList() ;   
         }
 
         public Usuario GetById(int id)
         {
-            return _db.Find(x => x.Id == id)!;
+            return _db.Usuarios.Find(id)!;
         }
 
         public void Update(Usuario usuario)
         {
-            _db.Remove(GetById(usuario.Id));
-            _db.Add(usuario);
+            _db.Usuarios.Update(usuario);
+            _db.SaveChanges();
         }
     }
 }
