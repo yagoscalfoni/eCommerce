@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Models", "eCommer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Models.DataAnnotations", "eCommerce.Models.DataAnnotations\eCommerce.Models.DataAnnotations.csproj", "{FC099BF4-6247-4880-8E0C-AA0421E5C148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCommerce.Models.FluetAPI", "eCommerce.Models.FluetAPI\eCommerce.Models.FluetAPI.csproj", "{51FBB580-F900-4211-B479-D5AB159EE4EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eCommerce.Models.FluetAPI", "eCommerce.Models.FluetAPI\eCommerce.Models.FluetAPI.csproj", "{51FBB580-F900-4211-B479-D5AB159EE4EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

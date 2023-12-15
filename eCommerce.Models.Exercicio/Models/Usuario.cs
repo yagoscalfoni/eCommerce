@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 
 namespace eCommerce.Models
@@ -25,6 +24,8 @@ namespace eCommerce.Models
         public string? NomePai { get; set; }
         public string? SituacaoCadastro { get; set; }
         public DateTimeOffset DataCadastro { get; set; }
+
+        modelBuilder.Entity<Usuario>().HasOne(Contato);
         public Contato? Contato { get; set; }        
         public ICollection<EnderecoEntrega>? EnderecoEntrega { get; set; }
         public ICollection<Departamento>? Departamentos { get; set; }
